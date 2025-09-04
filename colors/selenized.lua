@@ -18,11 +18,11 @@ local colors = {
         bg_0       = '#181818',  -- darker background
         bg_1       = '#252525',  -- slightly lighter background
         bg_2       = '#3b3b3b',  -- even lighter background
+        bg_15      = '#1a1a1a',  -- subtle background for embedded, selectable blocks
         dim_0      = '#777777',  -- dimmed text color
+        dim_1      = '#9e9e9e',  -- yellowish dim_0 for things like autocomplete previews
         fg_0       = '#b9b9b9',  -- primary foreground color
         fg_1       = '#dedede',  -- secondary foreground color
-        bg_15      = '#1a1a1a',  -- subtle background for embedded, selectable blocks
-        dim_1      = '#9e9e9e',  -- yellowish dim_0 for things like autocomplete previews
         red        = '#ed4a46',  -- red color
         green      = '#70b433',  -- green color
         yellow     = '#dbb32d',  -- yellow color
@@ -221,6 +221,7 @@ local highlights = function(colors)
     hi['SnippyPlaceholder']            = 'SnippetTabstop'
     -- vim Copilot
     hi['CopilotSuggestion']            = 'Suggestion'
+    hi['CopilotChatHelp']              = { bg = colors.bg_15 }
 
     -- Built-in diagnostic
     hi['DiagnosticError']              = { fg = colors.red, bg = hi['SignColumn'].bg }
@@ -266,7 +267,8 @@ local highlights = function(colors)
     hi['CmpItemKindUnit']              = 'Special'
     hi['CmpItemKindValue']             = 'Identifier'
     hi['CmpItemKindVariable']          = 'Delimiter'
-    hi['CmpItemKindCopilot']           = 'Structure'
+    hi['CmpItemKindCopilot']           = 'CmpItemKindStruct'
+    hi['CmpItemKindWordPress']         = 'CmpItemKindConstant'
 
     -- Git Signs
     hi['GitSignsAdd']                  = { fg = colors.green, bg = colors.bg_1 }
@@ -377,11 +379,14 @@ local highlights = function(colors)
     hi['@tag.delimiter']               = 'Delimiter'  -- XML-style tag delimiters
 
     -- Markup
-    hi['@markup.raw']                  = { bg = colors.bg_15 }
+    hi['@markup.raw.block.vimdoc']     = { bg = colors.bg_15 }
     hi['@markup.link']                 = 'Identifier'
     hi['@markup.heading']              = { fg = colors.fg_1, bold = true }
     hi['@markup.link.url']             = 'Underlined'
     hi['@markup.underline']            = 'Underlined'
+
+    -- render-markdown.nvim
+    hi['RenderMarkdownCode']           = { bg = colors.bg_15 }
 
     -- LSP semantic tokens
     hi['@lsp.type.comment']            = {}              -- reset since it interferes with the `@comment` group
